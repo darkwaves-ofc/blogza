@@ -1,6 +1,6 @@
 import { getBlogs } from '../actions/blogActions'
 import Header from '../components/Header'
-import ClientSearch from './ClientSearch'
+import ClientSearch from '../../components/blog/ClientSearch'
 
 export default async function AllBlogs() {
   const blogs = await getBlogs()
