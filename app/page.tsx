@@ -10,7 +10,7 @@ async function getFeaturedBlogs() {
 
 export default async function Home() {
   const featuredBlogs = await getFeaturedBlogs()
-
+console.log(featuredBlogs)
   return (
     <>
       <Header />
