@@ -1,16 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
+  images: {
+    domains: [
+      "images.pexels.com",
+      "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
+      "res.cloudinary.com",
+      "cdn.noerror.studio",
+    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.noerror.studio",
+      },
+    ],
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-  },
-}
+};
 
-(nextConfig)
-
-
-export default nextConfig
+export default nextConfig;
