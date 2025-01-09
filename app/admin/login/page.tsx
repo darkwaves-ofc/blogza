@@ -1,31 +1,34 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { handleAdminLogin } from "@/app/actions/auth";
 
 export default function AdminLogin() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const router = useRouter()
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // In a real application, you would validate the credentials against your API
-    if (username === 'admin' && password === 'password') {
-      // Set a token in localStorage or use a more secure method like HttpOnly cookies
-      localStorage.setItem('adminToken', 'your-auth-token')
-      router.push('/admin/dashboard')
+
+    const response = await handleAdminLogin({ username, password });
+    if (response.success) {
+      router.push("/admin/dashboard");
     } else {
-      alert('Invalid credentials')
+      alert("Invalid credentials");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">Admin Login</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">
+          Admin Login
+        </h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <Input
@@ -51,6 +54,5 @@ export default function AdminLogin() {
         </form>
       </div>
     </div>
-  )
+  );
 }
-

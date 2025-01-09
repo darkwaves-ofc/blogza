@@ -1,70 +1,82 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import dynamic from 'next/dynamic'
-import Header from '../../components/Header'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { getBlogs, createBlog, updateBlog, deleteBlog } from '../../actions/blogActions'
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import Header from "../../components/Header";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  getBlogs,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+} from "../../actions/blogActions";
+import { BlogTypes } from "@/types/blog";
+import { checkAdminAuth } from "@/app/actions/auth";
 
 const MDEditor = dynamic(
   () => import("@uiw/react-md-editor").then((mod) => mod.default),
   { ssr: false }
-)
+);
 
 export default function AdminDashboard() {
-  const [blogs, setBlogs] = useState([])
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [markdown, setMarkdown] = useState('')
-  const [editingId, setEditingId] = useState(null)
-  const router = useRouter()
+  const [blogs, setBlogs] = useState<(BlogTypes & { id: string })[]>([]);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [markdown, setMarkdown] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('adminToken')
-    if (!token) {
-      router.push('/admin/login')
-    }
-    fetchBlogs()
-  }, [router])
+    const checkAuth = async () => {
+      const response = await checkAdminAuth();
+      if (!response.success || !response.isAuthenticated) {
+        router.push("/admin/login");
+      }
+    };
+    checkAuth();
+    fetchBlogs();
+  }, [router]);
 
   async function fetchBlogs() {
-    const data = await getBlogs()
-    setBlogs(data)
+    const data = await getBlogs();
+    setBlogs(data);
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (editingId) {
-      await updateBlog(editingId, { title, content, markdown })
+      await updateBlog(editingId, { title, content, markdown });
     } else {
-      await createBlog({ title, content, markdown })
+      await createBlog({ title, content, markdown });
     }
-    setTitle('')
-    setContent('')
-    setMarkdown('')
-    setEditingId(null)
-    fetchBlogs()
-  }
+    setTitle("");
+    setContent("");
+    setMarkdown("");
+    setEditingId(null);
+    fetchBlogs();
+  };
 
-  const handleEdit = (blog) => {
-    setTitle(blog.title)
-    setContent(blog.content)
-    setMarkdown(blog.markdown)
-    setEditingId(blog.id)
-  }
+  const handleEdit = (blog: BlogTypes & { id: string }) => {
+    setTitle(blog.title);
+    setContent(blog.content);
+    setMarkdown(blog.markdown);
+    setEditingId(blog.id);
+  };
 
-  const handleDelete = async (id) => {
-    await deleteBlog(id)
-    fetchBlogs()
-  }
+  const handleDelete = async (id: string) => {
+    await deleteBlog(id);
+    fetchBlogs();
+  };
 
   return (
     <>
       <Header />
       <div className="container mx-auto px-6 py-8">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">Admin Dashboard</h1>
+        <h1 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">
+          Admin Dashboard
+        </h1>
         <form onSubmit={handleSubmit} className="mb-8">
           <Input
             type="text"
@@ -77,7 +89,7 @@ export default function AdminDashboard() {
           <div className="mb-4">
             <MDEditor
               value={markdown}
-              onChange={setMarkdown}
+              onChange={(value) => setMarkdown(value || "")}
               preview="edit"
             />
           </div>
@@ -89,22 +101,35 @@ export default function AdminDashboard() {
             className="mb-4"
             required
           />
-          <Button type="submit">{editingId ? 'Update' : 'Create'} Blog</Button>
+          <Button type="submit">{editingId ? "Update" : "Create"} Blog</Button>
         </form>
         <div className="space-y-4">
           {blogs.map((blog) => (
-            <div key={blog.id} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-              <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{blog.title}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{blog.content.substring(0, 100)}...</p>
+            <div
+              key={blog.id}
+              className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow"
+            >
+              <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
+                {blog.title}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                {blog.content.substring(0, 100)}...
+              </p>
               <div className="space-x-2">
-                <Button onClick={() => handleEdit(blog)} variant="outline">Edit</Button>
-                <Button onClick={() => handleDelete(blog.id)} variant="destructive">Delete</Button>
+                <Button onClick={() => handleEdit(blog)} variant="outline">
+                  Edit
+                </Button>
+                <Button
+                  onClick={() => handleDelete(blog.id)}
+                  variant="destructive"
+                >
+                  Delete
+                </Button>
               </div>
             </div>
           ))}
         </div>
       </div>
     </>
-  )
+  );
 }
-
