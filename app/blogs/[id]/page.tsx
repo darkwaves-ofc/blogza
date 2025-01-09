@@ -2,6 +2,9 @@ import { getBlogById } from '../../actions/blogActions'
 import Header from '../../components/Header'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
+
+const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: false })
 
 interface BlogPageProps {
   params: { id: string }
@@ -35,7 +38,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       <article className="container mx-auto px-6 py-8">
         <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-white">{blog.title}</h1>
         <div className="prose dark:prose-invert max-w-none">
-          <p>{blog.content}</p>
+          <ReactMarkdown>{blog.markdown}</ReactMarkdown>
         </div>
       </article>
     </>

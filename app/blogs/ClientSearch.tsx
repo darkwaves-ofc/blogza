@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: false })
 
 export default function ClientSearch({ blogs }) {
   const [searchTerm, setSearchTerm] = useState('')
@@ -28,7 +31,9 @@ export default function ClientSearch({ blogs }) {
         {filteredBlogs.map((blog) => (
           <div key={blog.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{blog.title}</h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">{blog.content.substring(0, 100)}...</p>
+            <div className="text-gray-600 dark:text-gray-300 mb-4 prose dark:prose-invert">
+              <ReactMarkdown>{blog.markdown.substring(0, 150)}...</ReactMarkdown>
+            </div>
             <Link href={`/blogs/${blog.id}`}>
               <Button variant="outline">Read More</Button>
             </Link>

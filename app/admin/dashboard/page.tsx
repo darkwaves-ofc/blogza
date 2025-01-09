@@ -2,16 +2,22 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import Header from '../../components/Header'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
 import { getBlogs, createBlog, updateBlog, deleteBlog } from '../../actions/blogActions'
+
+const MDEditor = dynamic(
+  () => import("@uiw/react-md-editor").then((mod) => mod.default),
+  { ssr: false }
+)
 
 export default function AdminDashboard() {
   const [blogs, setBlogs] = useState([])
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [markdown, setMarkdown] = useState('')
   const [editingId, setEditingId] = useState(null)
   const router = useRouter()
 
@@ -31,12 +37,13 @@ export default function AdminDashboard() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (editingId) {
-      await updateBlog(editingId, { title, content })
+      await updateBlog(editingId, { title, content, markdown })
     } else {
-      await createBlog({ title, content })
+      await createBlog({ title, content, markdown })
     }
     setTitle('')
     setContent('')
+    setMarkdown('')
     setEditingId(null)
     fetchBlogs()
   }
@@ -44,6 +51,7 @@ export default function AdminDashboard() {
   const handleEdit = (blog) => {
     setTitle(blog.title)
     setContent(blog.content)
+    setMarkdown(blog.markdown)
     setEditingId(blog.id)
   }
 
@@ -66,8 +74,16 @@ export default function AdminDashboard() {
             className="mb-4"
             required
           />
-          <Textarea
-            placeholder="Blog Content"
+          <div className="mb-4">
+            <MDEditor
+              value={markdown}
+              onChange={setMarkdown}
+              preview="edit"
+            />
+          </div>
+          <Input
+            type="text"
+            placeholder="Short content (for previews)"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             className="mb-4"

@@ -1,16 +1,11 @@
-import Header from './components/Header'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { getBlogs } from './actions/blogActions'
-
-async function getFeaturedBlogs() {
-  const blogs = await getBlogs()
-  return blogs.slice(0, 3) // Return only the first 3 blogs as featured
-}
+import Header from "./components/Header";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { getBlogs, getFeaturedBlogs } from "./actions/blogActions";
 
 export default async function Home() {
-  const featuredBlogs = await getFeaturedBlogs()
-console.log(featuredBlogs)
+  const featuredBlogs = await getFeaturedBlogs(3);
+
   return (
     <>
       <Header />
@@ -19,13 +14,21 @@ console.log(featuredBlogs)
           Welcome to DarkWaves
         </h1>
         <p className="text-center text-xl mb-12 text-gray-600 dark:text-gray-300">
-          Explore the mysteries of the universe through our captivating blog posts.
+          Explore the mysteries of the universe through our captivating blog
+          posts.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredBlogs.map((blog) => (
-            <div key={blog.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{blog.title}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{blog.content.substring(0, 100)}...</p>
+            <div
+              key={blog.id}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
+            >
+              <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
+                {blog.title}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                {blog.content.substring(0, 100)}...
+              </p>
               <Link href={`/blogs/${blog.id}`}>
                 <Button variant="outline">Read More</Button>
               </Link>
@@ -39,6 +42,5 @@ console.log(featuredBlogs)
         </div>
       </div>
     </>
-  )
+  );
 }
-
