@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Header from "./components/Header";
+import Header from "../../components/common/Header";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { getBlogs, getFeaturedBlogs } from "./actions/blogActions";
-import LoadingSpinner from "./components/LoadingSpinner";
+import { getBlogs, getFeaturedBlogs } from "../../actions/blogActions";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { BlogTypes } from "@/types/blog";
@@ -29,7 +29,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-gray-100 dark:bg-gray-900">
         {/* Hero Section */}
         <section className="relative h-screen flex items-center justify-center text-center text-white">

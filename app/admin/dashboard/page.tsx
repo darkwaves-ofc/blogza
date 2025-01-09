@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import Header from "../../components/Header";
+import Header from "../../../components/common/Header";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,9 +11,9 @@ import {
   createBlog,
   updateBlog,
   deleteBlog,
-} from "../../actions/blogActions";
+} from "../../../actions/blogActions";
 import { BlogTypes } from "@/types/blog";
-import { checkAdminAuth } from "@/app/actions/auth";
+import { checkAdminAuth } from "@/actions/auth";
 
 const MDEditor = dynamic(
   () => import("@uiw/react-md-editor").then((mod) => mod.default),

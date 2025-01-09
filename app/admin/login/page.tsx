@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { handleAdminLogin } from "@/app/actions/auth";
+import { handleAdminLogin } from "@/actions/auth";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");

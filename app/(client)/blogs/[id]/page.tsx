@@ -1,5 +1,6 @@
-import { getBlogById } from "../../actions/blogActions";
-import Header from "../../components/Header";
+import { getBlogById } from '@/actions/blogActions'
+import Header from '@/components/common/Header'
+import ClientSearch from '@/components/blog/ClientSearch'
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
@@ -36,7 +37,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
   return (
     <>
-      <Header />
       <article className="container mx-auto px-6 py-8">
         <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-white">
           {blog.title}
