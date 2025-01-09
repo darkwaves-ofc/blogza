@@ -2,12 +2,14 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+generator client {
+  provider = "prisma-client-js"
+}
 model Blog {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   content   String
-  markdown  String   // New field for storing Markdown content
+  markdown  String // New field for storing Markdown content
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
