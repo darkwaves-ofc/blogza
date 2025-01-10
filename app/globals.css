@@ -92,3 +92,31 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+/* mdPreview.module.css */
+.md-preview blockquote,
+.md-preview dd,
+.md-preview dl,
+.md-preview figure,
+.md-preview h1,
+.md-preview h2,
+.md-preview h3,
+.md-preview h4,
+.md-preview h5,
+.md-preview h6,
+.md-preview hr,
+.md-preview p,
+.md-preview pre {
+  margin: 0;
+}
+
+.md-preview h1,
+.md-preview h2,
+.md-preview h3,
+.md-preview h4,
+.md-preview h5,
+.md-preview h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}

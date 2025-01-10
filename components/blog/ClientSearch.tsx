@@ -37,7 +37,7 @@ export default function ClientSearch({ blogs }: { blogs: BlogTypes[] }) {
             <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
               {blog.title}
             </h2>
-            <div className="text-gray-600 dark:text-gray-300 mb-4 prose dark:prose-invert">
+            <div className="text-gray-600 md-preview dark:text-gray-300 mb-4 prose dark:prose-invert">
               <Markdown>{blog.markdown.substring(0, 150)}</Markdown>
               {/* {blog.markdown.substring(0, 150)}... */}
             </div>
