@@ -3,6 +3,10 @@
 import { cookies } from "next/headers";
 import { SignJWT, jwtVerify } from "jose";
 
+async function checkAuth() {
+  
+}
+
 export async function checkAdminAuth() {
   const adminUsername = process.env.ADMIN_USERNAME;
   const adminPassword = process.env.ADMIN_PASSWORD;
