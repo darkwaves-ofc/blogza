@@ -33,7 +33,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative h-screen flex items-center justify-center text-center text-white">
           <Image
-            src="/hero-background.jpg"
+            src="/landing/hero.png"
             alt="Space background"
             layout="fill"
             objectFit="cover"
@@ -125,7 +125,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/2 mb-8 md:mb-0">
                 <Image
-                  src="/about-image.jpg"
+                  src="/landing/about.png"
                   alt="About DarkWaves"
                   width={500}
                   height={500}
