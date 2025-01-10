@@ -31,7 +31,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const checkAuth = async () => {
       const response = await checkAdminAuth();
-      if (!response.success || !response.isAuthenticated) {
+      if (!response.isAuthenticated) {
         router.push("/admin/login");
       }
     };
