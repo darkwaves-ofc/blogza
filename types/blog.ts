@@ -1,9 +1,11 @@
 export interface BlogTypes {
   id: string;
+  slug: string;
   title: string;
-  content: string;
-  markdown: string;
+  description: string;
+  mainImage: string;
+  published: boolean;
   createdAt: Date;
   updatedAt: Date;
+  authorId: string;
 }
-

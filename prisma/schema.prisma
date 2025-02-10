@@ -6,10 +6,42 @@ generator client {
   provider = "prisma-client-js"
 }
 model Blog {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  content   String
-  markdown  String // New field for storing Markdown content
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  slug        String       @unique
+  title       String
+  description String
+  mainImage   String
+  sections    BlogSection[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  published   Boolean      @default(false)
+  authorId    String?       @db.ObjectId
+  author      User?         @relation(fields: [authorId], references: [id])
+}
+
+model BlogSection {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  blogId      String    @db.ObjectId
+  blog        Blog      @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  order       Int
+  type        String    // Can be "text", "image", "gallery", "video", "quote", "link", "button", etc.
+  title       String?
+  subtitle    String?
+  content     String?
+  imageUrl    String?
+  buttonText  String?
+  buttonUrl   String?
+  linkText    String?
+  linkUrl     String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model User {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  email     String    @unique
+  name      String
+  blogs     Blog[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }

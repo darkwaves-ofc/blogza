@@ -13,8 +13,7 @@ export default function ClientSearch({ blogs }: { blogs: BlogTypes[] }) {
 
   const filteredBlogs = blogs.filter(
     (blog) =>
-      blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      blog.content.toLowerCase().includes(searchTerm.toLowerCase())
+      blog.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
   
   return (
@@ -38,8 +37,6 @@ export default function ClientSearch({ blogs }: { blogs: BlogTypes[] }) {
               {blog.title}
             </h2>
             <div className="text-gray-600 md-preview dark:text-gray-300 mb-4 prose dark:prose-invert">
-              <Markdown>{blog.markdown.substring(0, 150)}</Markdown>
-              {/* {blog.markdown.substring(0, 150)}... */}
             </div>
             <Link href={`/blogs/${blog.id}`}>
               <Button variant="outline">Read More</Button>
