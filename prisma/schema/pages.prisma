@@ -1,0 +1,25 @@
+
+
+model pageContent {
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
+  path             String
+  section          String
+  title            String
+  content          String
+  pageContentFiles pageContentFile[]
+
+  @@unique([path, section])
+}
+
+model pageContentFile {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  pageContentId String      @unique @db.ObjectId
+  pageContent   pageContent @relation(fields: [pageContentId], references: [id], onDelete: Cascade)
+  token         String      @unique
+  cdnId         String?     @unique
+  name          String?
+  extension     String?
+  private       Boolean
+  size          Int?
+  verified      DateTime?
+}

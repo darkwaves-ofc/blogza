@@ -1,0 +1,57 @@
+<div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif">
+  <div
+    style="
+      background-color: #0088ff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">{{title}}</h1>
+  </div>
+  <div
+    style="
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    "
+  >
+    <div
+      style="
+        background-color: #f8f9fa;
+        border-left: 4px solid #0088ff;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+      <h2 style="margin: 0 0 10px; color: #333; font-size: 20px">
+        Notification Details
+      </h2>
+      <p style="margin: 0; color: #666">Role: {{roleName}}</p>
+      <p style="color: #666; margin-top: 10px">Emitted: {{emittedAt}}</p>
+    </div>
+
+    <div style="margin-top: 20px">
+      <h3 style="color: #333; margin-bottom: 15px">Description</h3>
+      <p style="color: #666; line-height: 1.6">{{description}}</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px">
+      <a
+        href="{{domain}}/dashboard"
+        style="
+          background-color: #0088ff;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+        "
+      >
+        View Notifications
+      </a>
+    </div>
+  </div>
+</div>

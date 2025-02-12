@@ -48,7 +48,7 @@ const BlogForm = ({ initialData }: { initialData?: any }) => {
   const onSubmit = async (data: any) => {
     console.log(data);
     const res = await createBlog(data);
-    console.log(res)
+    console.log(res);
   };
 
   return (

@@ -1,0 +1,123 @@
+<div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif">
+  <!-- Header based on severity -->
+  {{#if (eq severity 'critical')}}
+  <div
+    style="
+      background-color: #ff4444;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">System Alert</h1>
+  </div>
+  {{else if (eq severity 'warning')}}
+  <div
+    style="
+      background-color: #ffaa00;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">System Alert</h1>
+  </div>
+  {{else}}
+  <div
+    style="
+      background-color: #0088ff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">System Alert</h1>
+  </div>
+  {{/if}}
+
+  <!-- Content Wrapper -->
+  <div
+    style="
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    "
+  >
+    <!-- Alert Message Box -->
+    {{#if (eq severity 'critical')}}
+    <div
+      style="
+        background-color: #f8f9fa;
+        border-left: 4px solid #ff4444;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+    {{else if (eq severity 'warning')}}
+    <div
+      style="
+        background-color: #f8f9fa;
+        border-left: 4px solid #ffaa00;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+    {{else}}
+    <div
+      style="
+        background-color: #f8f9fa;
+        border-left: 4px solid #0088ff;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+    {{/if}}
+
+      <h2 style="margin: 0 0 10px; color: #333; font-size: 20px">
+        {{alertType}}
+      </h2>
+      <p style="margin: 0; color: #666; font-size: 16px">
+        Started at: {{startTime}}
+        {{#if estimatedResolution}}
+        <br />
+        Estimated resolution: {{estimatedResolution}}
+        {{/if}}
+      </p>
+    </div>
+
+    <!-- Affected Services -->
+    <div style="margin: 20px 0">
+      <h3 style="color: #333; font-size: 18px; margin: 0 0 10px">
+        Affected Services:
+      </h3>
+      <ul style="margin: 0; padding: 0 0 0 20px; list-style: disc; color: #666">
+        {{#each affectedServices}}
+        <li style="margin-bottom: 5px">{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+
+    <!-- Status Page Button -->
+    {{#if statusPageUrl}}
+    <div style="text-align: center; margin-top: 30px">
+      <a
+        href="{{statusPageUrl}}"
+        style="
+          background-color: #0088ff;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+        "
+      >
+        View Status Page
+      </a>
+    </div>
+    {{/if}}
+  </div>
+</div>

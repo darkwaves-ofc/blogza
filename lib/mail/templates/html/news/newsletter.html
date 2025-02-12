@@ -1,0 +1,81 @@
+<div style="max-width: 600px; margin: 0 auto">
+  <h1
+    style="
+      color: #333;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 30px 0;
+      padding: 0;
+      text-align: center;
+    "
+  >
+    {{title}}
+  </h1>
+
+  {{#if featuredImage}}
+  <div style="margin: 20px 0">
+    <img
+      src="{{featuredImage}}"
+      alt="{{imageAlt}}"
+      style="width: 100%; max-width: 600px; height: auto; border-radius: 8px"
+    />
+  </div>
+  {{/if}}
+
+  <div style="color: #333; font-size: 16px; line-height: 24px; margin: 20px 0">
+    {{content}}
+  </div>
+
+  {{#if articles}}
+  <div style="margin: 30px 0">
+    <h2
+      style="color: #333; font-size: 20px; font-weight: bold; margin: 0 0 20px"
+    >
+      Latest Articles
+    </h2>
+    {{#each articles}}
+    <div
+      style="
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+      "
+    >
+      <h3 style="color: #333; font-size: 18px; margin: 0 0 10px">
+        {{this.title}}
+      </h3>
+      <p
+        style="
+          color: #666;
+          font-size: 14px;
+          line-height: 21px;
+          margin: 0 0 10px;
+        "
+      >
+        {{this.excerpt}}
+      </p>
+      <a
+        href="{{this.link}}"
+        style="color: #2754c5; text-decoration: none; font-weight: bold"
+        >Read more →</a
+      >
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  <div style="text-align: center; margin: 30px 0">
+    <a
+      href="{{domain}}/news"
+      style="
+        background-color: #2754c5;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+      "
+      >View All News</a
+    >
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif">
+  {{#if (eq alertType 'payment_failed')}}
+  <div
+    style="
+      background-color: #ff4444;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">Payment Failed</h1>
+  </div>
+  {{else if (eq alertType 'payment_success')}}
+  <div
+    style="
+      background-color: #28a745;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">Payment Successful</h1>
+  </div>
+  {{else if (eq alertType 'subscription_expiring')}}
+  <div
+    style="
+      background-color: #ffaa00;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">Subscription Expiring</h1>
+  </div>
+  {{else}}
+  <div
+    style="
+      background-color: #0088ff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">Payment Alert</h1>
+  </div>
+  {{/if}}
+
+  <div
+    style="
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    "
+  >
+    {{#if (eq alertType 'payment_failed')}}
+    <div
+      style="
+        background-color: #f8f9fa;
+        border-left: 4px solid #ff4444;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+      <h2 style="margin: 0 0 10px; color: #333; font-size: 20px">
+        Payment Failed
+      </h2>
+      <p style="margin: 0; color: #666">
+        We couldn't process your payment of {{currency}} {{amount}} using
+        {{paymentMethod}}. Please check your payment details or try a different
+        method.
+      </p>
+      {{#if errorCode}}
+      <p style="color: #666; margin-top: 10px">Error Code: {{errorCode}}</p>
+      {{/if}}
+      {{#if nextAttempt}}
+      <p style="color: #666; margin-top: 10px">Next Attempt: {{nextAttempt}}</p>
+      {{/if}}
+    </div>
+    {{else if (eq alertType 'payment_success')}}
+    <div
+      style="
+        background-color: #f8f9fa;
+        border-left: 4px solid #28a745;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+      <h2 style="margin: 0 0 10px; color: #333; font-size: 20px">
+        Payment Successful
+      </h2>
+      <p style="margin: 0; color: #666">
+        Your payment of {{currency}} {{amount}} was successfully processed using
+        {{paymentMethod}}. Thank you for your purchase!
+      </p>
+    </div>
+    {{else if (eq alertType 'subscription_expiring')}}
+    <div
+      style="
+        background-color: #f8f9fa;
+        border-left: 4px solid #ffaa00;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+      <h2 style="margin: 0 0 10px; color: #333; font-size: 20px">
+        Subscription Expiring
+      </h2>
+      <p style="margin: 0; color: #666">
+        Your subscription will expire in {{daysUntilExpiry}} days. Please renew
+        it to continue enjoying our services.
+      </p>
+    </div>
+    {{else}}
+    <div
+      style="
+        background-color: #f8f9fa;
+        border-left: 4px solid #0088ff;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+      <h2 style="margin: 0 0 10px; color: #333; font-size: 20px">
+        General Alert
+      </h2>
+      <p style="margin: 0; color: #666">
+        Please check your account for more details.
+      </p>
+    </div>
+    {{/if}}
+
+    <div style="text-align: center; margin-top: 30px">
+      <a
+        href="/account"
+        style="
+          background-color: #0088ff;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+        "
+      >
+        Manage Your Account
+      </a>
+    </div>
+  </div>
+</div>

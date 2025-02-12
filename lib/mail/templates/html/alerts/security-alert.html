@@ -1,0 +1,72 @@
+<div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif">
+  <div
+    style="
+      background-color: #ff4444;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    "
+  >
+    <h1 style="margin: 0; font-size: 24px">Security Alert</h1>
+  </div>
+
+  <div
+    style="
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    "
+  >
+    <div
+      style="
+        background-color: #fff8f8;
+        border-left: 4px solid #ff4444;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+      <p style="margin: 0; color: #333; font-size: 16px">
+        {{#if location}} A {{alertType}} was detected from {{location}} {{else}}
+        A {{alertType}} was detected on your account {{/if}}
+      </p>
+    </div>
+
+    <div style="margin: 20px 0">
+      <h3 style="color: #333; font-size: 18px; margin: 0 0 10px">Details:</h3>
+      <ul style="margin: 0; padding: 0; list-style: none">
+        <li style="margin-bottom: 10px; color: #666">
+          <strong>Time:</strong> {{timestamp}}
+        </li>
+        {{#if ipAddress}}
+        <li style="margin-bottom: 10px; color: #666">
+          <strong>IP Address:</strong> {{ipAddress}}
+        </li>
+        {{/if}} {{#if deviceInfo}}
+        <li style="margin-bottom: 10px; color: #666">
+          <strong>Device:</strong> {{deviceInfo}}
+        </li>
+        {{/if}}
+      </ul>
+    </div>
+
+    {{#if actionRequired}}
+    <div style="text-align: center; margin-top: 30px">
+      <a
+        href="{{domain}}/security/review"
+        style="
+          background-color: #ff4444;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+        "
+      >
+        Review Activity
+      </a>
+    </div>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,63 @@
+enum PopupType {
+    banner
+    popup
+    alert
+}
+
+enum RecipientType {
+    all
+    new
+}
+
+model Popup {
+    id         String        @id @default(auto()) @map("_id") @db.ObjectId
+    type       PopupType
+    title      String
+    message    String
+    recipient  RecipientType
+    active     Boolean       @default(true)
+    autoClose  Int?
+    // Tracking fields
+    viewCount  Int           @default(0)
+    clickCount Int           @default(0)
+
+    // Timing and scheduling
+    startDate DateTime  @default(now())
+    endDate   DateTime?
+
+    // Additional metadata
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    createdBy String   @db.ObjectId // Reference to admin user who created it
+
+    // User tracking
+    viewedBy         UserPopupView[]
+    popupContentFile popupContentFile?
+}
+
+model UserPopupView {
+    id       String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId   String   @db.ObjectId // Reference to the user who viewed
+    popupId  String   @db.ObjectId
+    popup    Popup    @relation(fields: [popupId], references: [id])
+    viewedAt DateTime @default(now())
+    clicked  Boolean  @default(false)
+    user     User     @relation(fields: [userId], references: [id])
+
+    @@unique([userId, popupId])
+    @@index([userId])
+    @@index([popupId])
+}
+
+model popupContentFile {
+    id        String    @id @default(auto()) @map("_id") @db.ObjectId
+    popupId   String    @unique @db.ObjectId
+    popup     Popup     @relation(fields: [popupId], references: [id], onDelete: Cascade)
+    token     String    @unique
+    cdnId     String?   @unique
+    name      String?
+    extension String?
+    private   Boolean
+    size      Int?
+    verified  DateTime?
+}

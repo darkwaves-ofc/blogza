@@ -1,0 +1,19 @@
+model Notification {
+    id                   String                 @id @default(auto()) @map("_id") @db.ObjectId
+    title                String
+    description          String
+    notifyEmail          Boolean                @default(false)
+    createdAt            DateTime               @default(now())
+    emittedAt            DateTime?
+    roleIds              String[]               @db.ObjectId
+    roles                role[]                 @relation(fields: [roleIds], references: [id])
+    userNotificationView UserNotificationView[]
+}
+
+model UserNotificationView {
+    id             String       @id @default(auto()) @map("_id") @db.ObjectId
+    notificationId String       @db.ObjectId
+    userId         String       @db.ObjectId
+    createdAt      DateTime     @default(now())
+    notification   Notification @relation(fields: [notificationId], references: [id])
+}

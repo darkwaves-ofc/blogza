@@ -1,0 +1,77 @@
+<div style="max-width: 600px; margin: 0 auto">
+  <h1
+    style="
+      color: #333;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 30px 0;
+      padding: 0;
+      text-align: center;
+    "
+  >
+    New Product Update
+  </h1>
+
+  <div
+    style="
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    "
+  >
+    <h2 style="color: #333; font-size: 20px; margin: 0 0 15px">
+      {{updateTitle}}
+    </h2>
+    <p style="color: #666; font-size: 16px; line-height: 24px; margin: 0">
+      {{updateDescription}}
+    </p>
+  </div>
+
+  {{#if features}}
+  <div style="margin: 30px 0">
+    <h3 style="color: #333; font-size: 18px; margin: 0 0 20px">What's New</h3>
+    {{#each features}}
+    <div style="display: flex; margin-bottom: 15px; align-items: start">
+      <div
+        style="
+          background-color: #2754c5;
+          width: 24px;
+          height: 24px;
+          border-radius: 12px;
+          color: white;
+          text-align: center;
+          line-height: 24px;
+          margin-right: 10px;
+        "
+      >
+        ✓
+      </div>
+      <div>
+        <h4 style="color: #333; font-size: 16px; margin: 0 0 5px">
+          {{this.title}}
+        </h4>
+        <p style="color: #666; font-size: 14px; line-height: 21px; margin: 0">
+          {{this.description}}
+        </p>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  <div style="text-align: center; margin: 30px 0">
+    <a
+      href="{{domain}}/updates/{{updateId}}"
+      style="
+        background-color: #2754c5;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+      "
+      >Learn More</a
+    >
+  </div>
+</div>
